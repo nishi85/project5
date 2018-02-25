@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Header from "./header";
 import Roster from "./roster";
 import Start from "./start";
+import Myteam from "./myteam";
 
 
 
@@ -22,6 +23,8 @@ class App extends React.Component {
       super(props);
       this.state = {
         myTeam: [],
+        myTeamOffence: 0,
+        myTeamDefence: 0,
         oppTeam: [],
         players:[
                 {
@@ -60,13 +63,32 @@ class App extends React.Component {
 
 addPlayer(player) {
   if (this.state.myTeam.length <2) {
-  console.log('add player');
+
+  console.log('add player')
   const myTeamState = Array.from(this.state.myTeam);
   myTeamState.push(player);
   console.log(myTeamState);
+
   this.setState({
     myTeam: myTeamState
-  })}
+  }, () => {
+     if (this.state.myTeam.length > 1) {
+    let defence = [];
+    let offence = [];
+    this.state.myTeam.map(player => {
+        offence.push(player.offence)        
+        defence.push(player.defence)
+      });
+      this.setState({
+        myTeamOffence: offence.reduce( (prev, curr) => prev + curr )
+      }, () => {
+       console.log(this.state.myTeamOffence) 
+      })
+    }
+  })
+  }
+
+ 
 }    
 
 generateOppTeam(){
@@ -86,14 +108,26 @@ generateOppTeam(){
       return (
         <div>
           <Header />
-
             {this.state.players.map((player) =>{
               return (
               <Roster data={player} key={player.name} addPlayer={this.addPlayer}/>
               )
             })}
-
             <button onClick={this.generateOppTeam}>Opposing Team</button>
+           
+            {this.state.myTeam.map((player) =>{
+              return (
+              <Myteam data={player} key={player.name}/>
+              )
+            })}
+
+            <h3>vs</h3>
+            {this.state.oppTeam.map((player) =>{
+              return (
+              <Myteam data={player} key={player.name}/>
+              )
+            })}
+            
 
         </div>
       )

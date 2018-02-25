@@ -4,6 +4,7 @@ import Header from "./header";
 import Roster from "./roster";
 import Start from "./start";
 import Myteam from "./myteam";
+import Match from "./match";
 
 
 
@@ -23,28 +24,34 @@ class App extends React.Component {
       super(props);
       this.state = {
         myTeam: [],
+        availablePlayers: [],
         myTeamOffence: 0,
         myTeamDefence: 0,
         oppTeam: [],
+        oppTeamOffence: 0,
+        oppTeamDefence: 0,
         players:[
                 {
                   name: "Nishi",
-                  offence: 98,
-                  defence: 99,
-                  img: "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
+                  offence: 90,
+                  defence: 85,
+                  id: 1,
+                  img: "https://a.wattpad.com/useravatar/Son_Gohan_.256.37706.jpg"
                 },
 
                 {
                   name: "Ferd",
                   offence: 95,
                   defence: 95,
-                  img: "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
+                  id: 2,
+                  img: "https://pm1.narvii.com/6011/5cc246c01891ff4cba6ea71ddd3dd8b26023abdb_128.jpg"
                 },
 
                 {
                   name: "Goku",
                   offence: 99,
                   defence: 90,
+                  id: 3,
                   img: "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
                 },
 
@@ -52,7 +59,8 @@ class App extends React.Component {
                   name: "Luffy",
                   offence: 90,
                   defence: 99,
-                  img: "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
+                  id: 4,
+                  img: "https://files.gamebanana.com/img/ico/sprays/50849c6883a45.png"
                 }
        ]
       }
@@ -63,14 +71,13 @@ class App extends React.Component {
 
 addPlayer(player) {
   if (this.state.myTeam.length <2) {
-
-  console.log('add player')
   const myTeamState = Array.from(this.state.myTeam);
   myTeamState.push(player);
-  console.log(myTeamState);
-
+  const availablePlayersState = Array.from(this.state.players);
+  availablePlayersState.splice(player, 2)
   this.setState({
-    myTeam: myTeamState
+    myTeam: myTeamState,
+    availablePlayers: availablePlayersState
   }, () => {
      if (this.state.myTeam.length > 1) {
     let defence = [];
@@ -80,28 +87,38 @@ addPlayer(player) {
         defence.push(player.defence)
       });
       this.setState({
-        myTeamOffence: offence.reduce( (prev, curr) => prev + curr )
-      }, () => {
-       console.log(this.state.myTeamOffence) 
-      })
+        myTeamOffence: offence.reduce( (prev, curr) => prev + curr ),
+        myTeamDefence: defence.reduce( (prev, curr) => prev + curr )
+      } )
     }
   })
   }
-
- 
 }    
 
 generateOppTeam(){
-  const oppTeamState = Array.from(this.state.oppTeam);
-  for (let i = 0; i < this.state.players.length; i++) {
-    if (this.state.players[i] !== this.state.myTeam[i]) {
-        oppTeamState.push(this.state.players[i]);
-      }
-    }
+  const oppTeamState = Array.from(this.state.availablePlayers);
+  // for (let i = 0; i < this.state.availablePlayers.length - 1; i++) {
+  //   if (this.state.availablePlayers[i].id !== this.state.myTeam[i].id) {
+  //       oppTeamState.push(this.state.availablePlayers[i]);
+  //     }
+  //   }
     this.setState({
       oppTeam: oppTeamState
-    })
-    console.log(this.state.oppTeam);
+    }, () => {
+    let defence = [];
+    let offence = [];
+    this.state.oppTeam.map(opponent => {
+        offence.push(opponent.offence)        
+        defence.push(opponent.defence)
+      });
+      this.setState({
+        oppTeamOffence: offence.reduce( (prev, curr) => prev + curr ),
+        oppTeamDefence: defence.reduce( (prev, curr) => prev + curr )
+      } )
+  }
+  
+  )
+    
   }
 
     render() {
@@ -127,6 +144,12 @@ generateOppTeam(){
               <Myteam data={player} key={player.name}/>
               )
             })}
+
+            <Match myTeamOffence ={this.state.myTeamOffence}
+                   myTeamDefence ={this.state.myTeamDefence}
+                   oppTeamOffence ={this.state.oppTeamOffence}
+                   oppTeamDefence ={this.state.oppTeamDefence}
+            />
             
 
         </div>

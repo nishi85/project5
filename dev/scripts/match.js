@@ -17,39 +17,76 @@ function pointsAgainst(x) {
     return Math.floor(Math.random() * ((-x) * 2) + 100);
 }
 
-function outcome(x,y) {
-    if (x >= y) {
-        return <p>You scored {x} points and your opponent scored {y}. Congrats you won!</p>;
-    }
-    return <p>You scored {x} points and your opponent scored {y}. You lost!</p>;
-}
+// ---------------
 
 class Match extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            offenceDifference: 0,
+            defenceDifference: 0,
+            finalPointsFor : 0, 
+            finalPointsAgainst : 0, 
+            finalOutcome : 0,
+            loadReady: false,
+
+        }
+        this.loadData = this.loadData.bind(this);
     }
 
+    componentWillReceiveProps(NewProps) {
+        if (NewProps.teamsGenerated === true) {
+            this.loadData()
+        }
+    }
+
+    componentWillMount() {
+    }
+    
+     loadData() {
+        let { myTeamOffence, myTeamDefence, oppTeamOffence, oppTeamDefence } = this.props;
+
+       const offenceDifference = finalOffence(myTeamOffence, oppTeamOffence);
+       const defenceDifference = finalDefence(myTeamDefence, oppTeamDefence);
+       const finalPointsFor = pointsFor(offenceDifference);
+       const finalPointsAgainst = pointsAgainst(defenceDifference);
+
+       this.setState(
+         {
+           offenceDifference: offenceDifference,
+           defenceDifference: defenceDifference,
+           finalPointsFor: finalPointsFor,
+           finalPointsAgainst: finalPointsAgainst,
+         },
+         () => {
+           this.setState({ loadReady: true });
+         }
+        )
+        
+        this.props.seasonRecord(finalPointsFor, finalPointsAgainst, 1);
+     }
+    
     render() {
-        const teamAOffence = this.props.myTeamOffence;
-        const teamADefence = this.props.myTeamDefence;
-        const teamBOffence = this.props.oppTeamOffence;
-        const teamBDefence = this.props.oppTeamDefence;
-        const offenceDifference = finalOffence(teamAOffence, teamBOffence);
-        const defenceDifference = finalDefence(teamADefence, teamBDefence);
-        const finalPointsFor = pointsFor(offenceDifference);
-        const finalPointsAgainst = pointsAgainst(defenceDifference);
-        const finalOutcome = outcome(finalPointsFor, finalPointsAgainst);
+        let { myTeamOffence, myTeamDefence, oppTeamOffence, oppTeamDefence } = this.props;        
+        let {offenceDifference, defenceDifference, finalPointsFor, finalPointsAgainst, finalOutcome } = this.state;
+
         return (
             <div>
-                <p>My team offence: {teamAOffence}</p>
-                <p>My team defence: {teamADefence}</p>
-                <p>Opposing team offence: {teamBOffence}</p>
-                <p>Opposing team defence: {teamBDefence}</p>
-                <p>Difference is {offenceDifference}</p>
-                <p>Difference is {defenceDifference}</p>
-                <p>{finalOutcome}</p>
+                {this.state.loadReady && 
+                    <div>
+                        <p>My team offence: {myTeamOffence}</p>
+                        <p>My team defence: {myTeamDefence}</p>
+                        <p>Opposing team offence: {oppTeamOffence}</p>
+                        <p>Opposing team defence: {oppTeamOffence}</p>
+                        <p>Difference is {offenceDifference}</p>
+                        <p>Difference is {defenceDifference}</p>
+
+                        <h3>{this.props.message}</h3>
+                        <p>Wins: {this.props.wins}</p>
+                        <p>Losses:{this.props.losses}</p>
+                </div>}
             </div>
-        );
+            )
     }
 }
 

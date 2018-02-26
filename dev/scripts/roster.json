@@ -1,26 +1,28 @@
-[
-    {
-    name: "Nishi",
-    offence: 98,
-    defence: 99,
-    img: "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
-    },
-    {
-    name: "Ferd",
-    offence: 95,
-    defence: 95,
-    img: "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
-    },
-    {
-    name: "Goku",
-    offence: 99,
-    defence: 90,
-    img: "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
-    },
-    {
-    name: "Luffy",
-    offence: 90,
-    defence: 99,
-    img: "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
+{
+   "roster": {
+            {
+            "name": "Nishi",
+            "offence": 98,
+            "defence": 99,
+            "img": "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
+        },
+     {
+            "name": "Goku",
+            "offence": 98,
+            "defence": 99,
+            "img": "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
+        },
+        {
+        "name": "Luffy",
+            "offence": 98,
+            "defence": 99,
+            "img": "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
+        },
+      {
+        "name": "Ferd",
+            "offence": 98,
+            "defence": 99,
+            "img": "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
+        }
     }
-]
+}

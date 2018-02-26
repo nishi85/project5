@@ -1,0 +1,31 @@
+main {
+    max-width: 1170px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 auto;
+    justify-content: space-between;
+
+    h2 {
+        width: 100%;
+    }
+.playerCard {
+    width: 24%;
+    margin: 5px;
+    img {
+        width:100%;
+    }
+
+    border: 1px solid black;
+}
+.playerCard.chosen{
+    background: red;
+}
+button {
+    border: 1px solid black;
+    background: white;
+    padding: 5px;
+    margin: 5px;
+}
+
+}

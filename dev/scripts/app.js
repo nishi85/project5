@@ -48,7 +48,7 @@ class App extends React.Component {
           offence: 90,
           defence: 80,
           id: 1,
-          img: "https://a.wattpad.com/useravatar/Son_Gohan_.256.37706.jpg"
+          img: "public/assets/nishi.jpg"
         },
 
         {
@@ -56,24 +56,81 @@ class App extends React.Component {
           offence: 95,
           defence: 75,
           id: 2,
-          img:
-            "https://pm1.narvii.com/6011/5cc246c01891ff4cba6ea71ddd3dd8b26023abdb_128.jpg"
+          img: "public/assets/ferd.jpg"
         },
 
         {
-          name: "Goku",
+          name: "Aaron",
           offence: 99,
           defence: 80,
           id: 3,
-          img: "https://files.gamebanana.com/img/ico/sprays/nu8_2.png"
+          img: "public/assets/aaron.jpg"
         },
 
         {
-          name: "Luffy",
+          name: "Aathavan",
           offence: 80,
           defence: 99,
           id: 4,
-          img: "https://files.gamebanana.com/img/ico/sprays/50849c6883a45.png"
+          img: "public/assets/aath.jpg"
+        },
+
+        {
+          name: "Carolyn",
+          offence: 99,
+          defence: 80,
+          id: 3,
+          img: "public/assets/carolyn.jpg"
+        },
+
+                {
+          name: "Cece",
+          offence: 99,
+          defence: 80,
+          id: 3,
+          img: "public/assets/cece.jpg"
+        },
+        {
+          name: "Brent",
+          offence: 99,
+          defence: 80,
+          id: 3,
+          img: "public/assets/brent.jpg"
+        },
+        {
+          name: "Joey",
+          offence: 99,
+          defence: 80,
+          id: 3,
+          img: "public/assets/Joey.jpg"
+        },
+        {
+          name: "Linda",
+          offence: 99,
+          defence: 80,
+          id: 3,
+          img: "public/assets/linda.jpg"
+        },
+        {
+          name: "Natalie R",
+          offence: 99,
+          defence: 80,
+          id: 3,
+          img: "public/assets/natalie.jpg"
+        },
+       {
+          name: "Natasha",
+          offence: 99,
+          defence: 80,
+          id: 3,
+          img: "public/assets/nat.jpg"
+        },
+       {
+          name: "Natalie Van Dine",
+          offence: 99,
+          defence: 80,
+          id: 3,
+          img: "public/assets/nvd.jpg"
         }
       ]
     };
@@ -183,11 +240,21 @@ class App extends React.Component {
     })
   }
 
+  // componentDidMount() {
+  //  const dbrefPlayers = firebase.database().ref('/roster');
+  //  dbrefPlayers.on('value', (snapshot) => {
+  //    const rosterData = snapshotval();
+  //    this.setState({
+  //      players: rosterData
+  //    })
+  //  })
+  // }
+
       componentDidMount() {
-      const dbref= firebase.database().ref();
+      const dbref= firebase.database().ref().orderByChild('score');
+      // .limitToLast(100);
 
       dbref.on('value', (snapshot) => {
-        console.log('hey');
         const data = snapshot.val();
         const state = [];
         for(let key in data) {
@@ -227,10 +294,14 @@ class App extends React.Component {
 
     return <div>
         <Header />
-        {/* <Leaderboard data={this.state.data} sortBy='highscore' labelBy='username' /> */}
-        {this.state.players.map(player => {
-          return <Roster data={player} key={player.name} addPlayer={this.addPlayer} />;
-        })}
+        <main>
+          <h2>Select your team. Choose 2 players.</h2>
+        
+          {this.state.players.map(player => {
+            return <Roster data={player} key={player.name} addPlayer={this.addPlayer} />;
+          })}
+
+         </main>
         <button onClick={this.generateOppTeam}>Opposing Team</button>
 
         {this.state.myTeam.map(player => {
@@ -239,7 +310,7 @@ class App extends React.Component {
 
         <h3>vs</h3>
         {this.state.oppTeam.map(player => {
-          return <Myteam data={player} key={player.name} />;
+          return <Myteam data={player} key={player.id} />;
         })}
 
         <Match 

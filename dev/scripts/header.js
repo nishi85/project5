@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => (
   <header>
-    <h1>2 v 2!</h1>
+    <h1>Welcome to the ultimate 2 on 2 basketball tournament!</h1>
   </header>
 );
 

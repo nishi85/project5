@@ -36,9 +36,10 @@ class App extends React.Component {
       oppTeamOffence: 0,
       oppTeamDefence: 0,
       teamsGenerated: false,
-      data: [
-        {userName: 'Joe', highscore: 52}
-      ],
+      leaderboard: [],
+      teamName: '',
+      teamMemberA: '',
+      teamMemberB:'',
       players: [
         {
           name: "Nishi",
@@ -76,23 +77,25 @@ class App extends React.Component {
     };
     this.addPlayer = this.addPlayer.bind(this);
     this.generateOppTeam = this.generateOppTeam.bind(this);
-    this.seasonRecord = this.seasonRecord.bind(this)
-    this.resetGame = this.resetGame.bind(this)
+    this.seasonRecord = this.seasonRecord.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.resetGame = this.resetGame.bind(this);
+    this.addLeaderboard = this.addLeaderboard.bind(this);
   }
+
+  handleChange(e) {
+      this.setState({
+        [e.target.id]: e.target.value
+      });
+    }
 
   seasonRecord(x, y, times) {
     if (this.state.calculatedSeasonRecord === false) {
       this.setState({ calculatedSeasonRecord: true });
 
       let winsState, lossState, message;
-
       winsState = this.state.wins;
       lossState = this.state.losses;
-
-      Array(times)
-        .fill()
-        .map((_, i) => {
-
           if (x >= y) {
             winsState = winsState + 1;
             message = (<p>You scored {x} points and your opponent scored {y}. Congrats you won!</p>);
@@ -100,14 +103,11 @@ class App extends React.Component {
             lossState = lossState + 1;
             message = (<p>You scored {x} points and your opponent scored {y}. You lost!</p>)
           }
-        })
-    
       this.setState({
         wins: winsState,
         losses: lossState,
         message: message
       });
-
     }
   }
 
@@ -177,6 +177,42 @@ class App extends React.Component {
     })
   }
 
+      componentDidMount() {
+      const dbref= firebase.database().ref();
+
+      dbref.on('value', (snapshot) => {
+        console.log('hey');
+        const data = snapshot.val();
+        const state = [];
+        for(let key in data) {
+          
+          data[key].key = key;
+          state.push(data[key]);
+        }
+        console.log(state);
+        this.setState({
+          leaderboard: state
+        })
+      });
+    }
+
+  addLeaderboard(e) {
+  e.preventDefault();
+  const leaderboard = {
+    wins: this.state.wins,
+    teamName: this.state.teamName,
+    teamMemberA: this.state.myTeam[0].img,
+    teamMemberB: this.state.myTeam[1].img,
+  };
+  const dbref = firebase.database().ref();
+  dbref.push(leaderboard);
+  this.setState({
+    teamName: '',
+    teamMemberA: '',
+    teamMemberB:''
+  });
+}
+
   render() {
 
     return <div>
@@ -209,7 +245,12 @@ class App extends React.Component {
 
         <button onClick={this.resetGame}>Reset Game</button>
 
-      </div>;
+        <form onSubmit ={this.addLeaderboard}>
+            <label htmlFor="teamName">Team Name:</label>
+            <input type="text" value ={this.state.teamName} onChange ={this.handleChange} id="teamName"/>
+            <input type="submit" value="Add to Leaderboard" />
+          </form>
+      </div>
   }
 }
 

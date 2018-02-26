@@ -6,6 +6,7 @@ import Roster from "./roster";
 import Start from "./start";
 import Myteam from "./myteam";
 import Match from "./match";
+import Leaderboard from "./leaderboard";
 
 
   // Initialize Firebase
@@ -36,6 +37,7 @@ class App extends React.Component {
       oppTeamOffence: 0,
       oppTeamDefence: 0,
       teamsGenerated: false,
+      score: 0,
       leaderboard: [],
       teamName: '',
       teamMemberA: '',
@@ -93,20 +95,24 @@ class App extends React.Component {
     if (this.state.calculatedSeasonRecord === false) {
       this.setState({ calculatedSeasonRecord: true });
 
-      let winsState, lossState, message;
+      let winsState, lossState, message, scoreState;
       winsState = this.state.wins;
       lossState = this.state.losses;
+      scoreState = this.state.score;
           if (x >= y) {
             winsState = winsState + 1;
             message = (<p>You scored {x} points and your opponent scored {y}. Congrats you won!</p>);
+            scoreState = scoreState + x;
           } else {
             lossState = lossState + 1;
             message = (<p>You scored {x} points and your opponent scored {y}. You lost!</p>)
+            scoreState = scoreState + x;
           }
       this.setState({
         wins: winsState,
         losses: lossState,
-        message: message
+        message: message,
+        score: scoreState
       });
     }
   }
@@ -199,7 +205,7 @@ class App extends React.Component {
   addLeaderboard(e) {
   e.preventDefault();
   const leaderboard = {
-    wins: this.state.wins,
+    score: this.state.score,
     teamName: this.state.teamName,
     teamMemberA: this.state.myTeam[0].img,
     teamMemberB: this.state.myTeam[1].img,
@@ -209,7 +215,11 @@ class App extends React.Component {
   this.setState({
     teamName: '',
     teamMemberA: '',
-    teamMemberB:''
+    teamMemberB:'',
+    score: 0,
+    wins: 0,
+    myTeam: []
+
   });
 }
 
@@ -250,6 +260,13 @@ class App extends React.Component {
             <input type="text" value ={this.state.teamName} onChange ={this.handleChange} id="teamName"/>
             <input type="submit" value="Add to Leaderboard" />
           </form>
+
+  {this.state.leaderboard.map((leader) =>{
+              return (
+               <Leaderboard data={leader} key={leader.key} />
+              )
+            })}
+
       </div>
   }
 }

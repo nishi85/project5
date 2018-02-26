@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from "./header";
@@ -29,13 +30,15 @@ class App extends React.Component {
       message: '',
       calculatedSeasonRecord: false,
       myTeam: [],
-      availablePlayers: [],
       myTeamOffence: 0,
       myTeamDefence: 0,
       oppTeam: [],
       oppTeamOffence: 0,
       oppTeamDefence: 0,
       teamsGenerated: false,
+      data: [
+        {userName: 'Joe', highscore: 52}
+      ],
       players: [
         {
           name: "Nishi",
@@ -112,12 +115,9 @@ class App extends React.Component {
     if (this.state.myTeam.length < 2) {
       const myTeamState = Array.from(this.state.myTeam);
       myTeamState.push(player);
-      const availablePlayersState = Array.from(this.state.players);
-      availablePlayersState.splice(player, 2);
       this.setState(
         {
-          myTeam: myTeamState,
-          availablePlayers: availablePlayersState
+          myTeam: myTeamState
         },
         () => {
           if (this.state.myTeam.length > 1) {
@@ -138,12 +138,11 @@ class App extends React.Component {
   }
 
   generateOppTeam() {
-    const oppTeamState = Array.from(this.state.availablePlayers);
-    // for (let i = 0; i < this.state.availablePlayers.length - 1; i++) {
-    //   if (this.state.availablePlayers[i].id !== this.state.myTeam[i].id) {
-    //       oppTeamState.push(this.state.availablePlayers[i]);
-    //     }
-    //   }
+    const oppTeamState = [];
+    for (let i = 0; i < 2; i++) {
+      console.log(i);
+      oppTeamState.push(this.state.players[Math.floor(Math.random() * this.state.players.length)]);
+      }
     this.setState(
       {
         oppTeam: oppTeamState
@@ -182,6 +181,7 @@ class App extends React.Component {
 
     return <div>
         <Header />
+        {/* <Leaderboard data={this.state.data} sortBy='highscore' labelBy='username' /> */}
         {this.state.players.map(player => {
           return <Roster data={player} key={player.name} addPlayer={this.addPlayer} />;
         })}

@@ -1,5 +1,7 @@
 import React from "react";
 
+//functions
+
 
 function finalOffence(x,y) {
     return x - y;
@@ -34,6 +36,7 @@ class Match extends React.Component {
         this.loadData = this.loadData.bind(this);
     }
 
+    //so that function wont run right away
     componentWillReceiveProps(NewProps) {
         if (NewProps.teamsGenerated === true) {
             this.loadData()

@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from "./header";
 import Roster from "./roster";
-import Start from "./start";
 import Myteam from "./myteam";
 import Match from "./match";
 import Leaderboard from "./leaderboard";
@@ -309,6 +308,8 @@ class App extends React.Component {
             return <Myteam data={player} key={player.id} />;
           })}
         </section>
+          
+        <section>
 
         <Match 
           myTeamOffence={this.state.myTeamOffence} 
@@ -321,7 +322,11 @@ class App extends React.Component {
           losses={this.state.losses} 
           message={this.state.message} />
 
+          </section>
+
         <button onClick={this.resetGame}>Next Match</button>
+
+
         {this.state.wins >= 1 ? <form onSubmit ={this.addLeaderboard}>
             <p>Contratulations on winning 5 games! Your team is now eligible to be entered into the leaderboard!</p>
             <label htmlFor="teamName">Team Name:</label>

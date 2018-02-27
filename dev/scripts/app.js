@@ -321,15 +321,17 @@ class App extends React.Component {
           losses={this.state.losses} 
           message={this.state.message} />
 
-        <button onClick={this.resetGame}>Reset Game</button>
-
-        <form onSubmit ={this.addLeaderboard}>
+        <button onClick={this.resetGame}>Next Match</button>
+        {this.state.wins >= 1 ? <form onSubmit ={this.addLeaderboard}>
+            <p>Contratulations on winning 5 games! Your team is now eligible to be entered into the leaderboard!</p>
             <label htmlFor="teamName">Team Name:</label>
             <input type="text" value ={this.state.teamName} onChange ={this.handleChange} id="teamName"/>
             <input type="submit" value="Add to Leaderboard" />
-          </form>
+          </form> 
+          : null}
+       
 
-  {this.state.leaderboard.map((leader) =>{
+            {this.state.leaderboard.map((leader) =>{
               return (
                <Leaderboard data={leader} key={leader.key} />
               )

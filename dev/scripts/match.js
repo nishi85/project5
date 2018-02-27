@@ -74,10 +74,6 @@ class Match extends React.Component {
             <div>
                 {this.state.loadReady && 
                     <div>
-                        <p>My team offence: {myTeamOffence}</p>
-                        <p>My team defence: {myTeamDefence}</p>
-                        <p>Opposing team offence: {oppTeamOffence}</p>
-                        <p>Opposing team defence: {oppTeamOffence}</p>
                         <h3>{this.props.message}</h3>
                         <p>Wins: {this.props.wins}</p>
                         <p>Losses:{this.props.losses}</p>

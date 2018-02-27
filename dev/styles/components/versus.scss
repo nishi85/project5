@@ -1,6 +1,6 @@
 .versus {
 
-    width: 1170px;
+    max-width: 1170px;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
@@ -37,7 +37,15 @@
         margin: 10px 5px 5px 5px;
          border: 1px solid black;
         background: white;
+        transition: all 1s;
+            &:hover {
+        background: rgba(0,0,0,0.8);
+        color: #fff;
+        border: 1px solid white;
     }
 
+}
 
 }
+
+

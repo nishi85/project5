@@ -45,24 +45,24 @@ class App extends React.Component {
       players: [
         {
           name: "Nishi",
-          offence: 90,
-          defence: 80,
+          offence: 88,
+          defence: 98,
           id: 1,
           img: "public/assets/nishi.jpg"
         },
 
         {
           name: "Ferd",
-          offence: 95,
-          defence: 75,
+          offence: 75,
+          defence: 95,
           id: 2,
           img: "public/assets/ferd.jpg"
         },
 
         {
           name: "Aaron",
-          offence: 99,
-          defence: 80,
+          offence: 79,
+          defence: 90,
           id: 3,
           img: "public/assets/aaron.jpg"
         },
@@ -70,66 +70,66 @@ class App extends React.Component {
         {
           name: "Aathavan",
           offence: 80,
-          defence: 99,
+          defence: 80,
           id: 4,
           img: "public/assets/aath.jpg"
         },
 
         {
           name: "Carolyn",
-          offence: 99,
-          defence: 80,
-          id: 3,
+          offence: 94,
+          defence: 84,
+          id: 5,
           img: "public/assets/carolyn.jpg"
         },
 
                 {
           name: "Cece",
-          offence: 99,
-          defence: 80,
-          id: 3,
+          offence: 85,
+          defence: 85,
+          id: 6,
           img: "public/assets/cece.jpg"
         },
         {
           name: "Brent",
-          offence: 99,
-          defence: 80,
-          id: 3,
+          offence: 90,
+          defence: 90,
+          id: 7,
           img: "public/assets/brent.jpg"
         },
         {
           name: "Joey",
-          offence: 99,
+          offence: 80,
           defence: 80,
-          id: 3,
+          id: 8,
           img: "public/assets/Joey.jpg"
         },
         {
           name: "Linda",
-          offence: 99,
-          defence: 80,
-          id: 3,
+          offence: 92,
+          defence: 88,
+          id: 9,
           img: "public/assets/linda.jpg"
         },
         {
           name: "Natalie R",
           offence: 99,
-          defence: 80,
-          id: 3,
+          defence: 90,
+          id: 10,
           img: "public/assets/natalie.jpg"
         },
        {
           name: "Natasha",
-          offence: 99,
+          offence: 92,
           defence: 80,
-          id: 3,
+          id: 11,
           img: "public/assets/nat.jpg"
         },
        {
           name: "Natalie V D",
-          offence: 99,
+          offence: 90,
           defence: 80,
-          id: 3,
+          id: 12,
           img: "public/assets/nvd.jpg"
         }
       ]
@@ -288,70 +288,58 @@ class App extends React.Component {
         <Header />
         <main>
           <h2>Select your team. Choose 2 players.</h2>
+          <p>
+            Pics courtesy of Pam Lau. Visit her site
+            <a href="https://pamlau.com/"> here</a>
+          </p>
           {this.state.players.map(player => {
             return <Roster data={player} key={player.name} addPlayer={this.addPlayer} />;
           })}
-         </main>
-         <section className ="versus">
-         
+        </main>
+        <section className="versus">
           <h2>Today's Game:</h2>
           {this.state.myTeam.map(player => {
             return <Myteam data={player} key={player.name} />;
           })}
 
-           <div className="btnContainer">
+          <div className="btnContainer">
             <button onClick={this.generateOppTeam}>Face Off!</button>
-         </div>
+          </div>
 
           <h3>vs</h3>
           {this.state.oppTeam.map(player => {
             return <Myteam data={player} key={player.id} />;
           })}
         </section>
-          
-        <section className ="matchup">
 
-        <Match 
-          myTeamOffence={this.state.myTeamOffence} 
-          myTeamDefence={this.state.myTeamDefence} 
-          oppTeamOffence={this.state.oppTeamOffence} 
-          oppTeamDefence={this.state.oppTeamDefence} 
-          teamsGenerated={this.state.teamsGenerated} 
-          seasonRecord={this.seasonRecord} 
-          wins={this.state.wins} 
-          losses={this.state.losses} 
-          mes classNamesage={this.state.message} />
+        <section className="matchup">
+          <Match myTeamOffence={this.state.myTeamOffence} myTeamDefence={this.state.myTeamDefence} oppTeamOffence={this.state.oppTeamOffence} oppTeamDefence={this.state.oppTeamDefence} teamsGenerated={this.state.teamsGenerated} seasonRecord={this.seasonRecord} wins={this.state.wins} losses={this.state.losses} message={this.state.message} />
 
-        <div className = "btnContainer">
-          <button onClick={this.resetGame}>Next Match</button>
-        </div>
+          <div className="btnContainer">
+            <button onClick={this.resetGame}>Next Match</button>
+          </div>
+        </section>
 
-
-          </section>
-
-        
         {this.state.wins >= 1 ? <section className="highScore">
-         <form onSubmit ={this.addLeaderboard}>   
-            <p>Contratulations on winning 5 games! Your team is now eligible to be entered into the leaderboard!</p>
-            <p>Total Score: {this.state.score}</p>
-            <label htmlFor="teamName">Team Name: </label>
-            <input type="text" value ={this.state.teamName} onChange ={this.handleChange} id="teamName"/>
-            <input type="submit" value="Add to Leaderboard" />
-          </form> 
+            <form onSubmit={this.addLeaderboard}>
+              <p>
+                Contratulations on winning 5 games! Your team is now
+                eligible to be entered into the leaderboard!
+              </p>
+              <p>Total Score: {this.state.score}</p>
+              <label htmlFor="teamName">Team Name: </label>
+              <input type="text" value={this.state.teamName} onChange={this.handleChange} id="teamName" />
+              <input type="submit" value="Add to Leaderboard" />
+            </form>
+          </section> : null}
 
-</section>
-          : null}
-      
-          <section className= "lbc">
+        <section className="lbc">
           <h2>Leaderboard</h2>
-            {this.state.leaderboard.map((leader) =>{
-              return (
-               <Leaderboard data={leader} key={leader.key} />
-              )
-            })}
-           </section> 
-
-      </div>
+          {this.state.leaderboard.map(leader => {
+            return <Leaderboard data={leader} key={leader.key} />;
+          })}
+        </section>
+      </div>;
   }
 }
 

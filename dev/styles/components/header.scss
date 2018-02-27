@@ -1,9 +1,25 @@
 header {
     color: lightgrey;
-    font-size: 26px;
+    font-size: 18px;
     display: flex;
     text-align: center;
     text-transform: uppercase;
-    max-width: 1170px;
+    width: 100%;
+    background: darkblue;
     margin: 0 auto;
+    margin-top: 0;
+    padding: 5px;
+
+    h1 {
+        margin: 0;
+    }
+}
+
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+h1 {
+    font-size: 14px;
+}
 }

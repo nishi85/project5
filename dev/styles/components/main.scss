@@ -8,24 +8,63 @@ main {
 
     h2 {
         width: 100%;
+        color: black;
+        margin: 30px;
+    }
+
+    p {
+        width: 100%;
     }
 .playerCard {
     width: 24%;
     margin: 5px;
-    img {
+    border: 1px solid black;
+    transition: all 1s;
+    .playerimg {
+    width: 100%;
+    border-top: 1px solid black;
+        img {
         width:100%;
     }
+}
 
-    border: 1px solid black;
 }
-.playerCard.chosen{
-    background: red;
+
+.playerCard:hover {
+background: lightgray;
 }
+
+
+
 button {
     border: 1px solid black;
     background: white;
     padding: 5px;
     margin: 5px;
+    transition: all 1s;
+    &:hover {
+        background: rgba(0,0,0,0.8);
+        color: #fff;
+        border: 1px solid white;
+    }
+
+
+}
 }
 
+
+
+@media (max-width: 680px) {
+
+.playerCard {
+    width: 47%;
+}
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+.playerCard {
+    width: 47%;
+}
 }

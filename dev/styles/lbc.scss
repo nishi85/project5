@@ -1,6 +1,6 @@
 .lbc {
 
-    width: 33%;
+    width: 40%;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
@@ -20,17 +20,18 @@
         flex-wrap: wrap;
         text-align: center;
         margin: 0 auto;
-        justify-content: center;
+        justify-content: space-between;
         margin-bottom: 5px;
 
-        p{
+        h3, p{
             width: 100%;
             padding: 0;
             margin: 0;
         }
 
         .imgcontainer {
-            width: 50%;
+            width: 49.5%;
+            
         }
     }
 

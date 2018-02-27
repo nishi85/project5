@@ -103,7 +103,7 @@ class App extends React.Component {
           offence: 90,
           defence: 90,
           id: 8,
-          img: "./public/assets/Joey.jpg"
+          img: "./public/assets/joey.jpg"
         },
         {
           name: "Linda",

@@ -141,6 +141,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.resetGame = this.resetGame.bind(this);
     this.addLeaderboard = this.addLeaderboard.bind(this);
+    this.newTeam = this.newTeam.bind(this);
   }
 
   handleChange(e) {
@@ -166,7 +167,6 @@ class App extends React.Component {
           } else {
             lossState = lossState + 1;
             message = (<p>You scored {x} points and your opponent scored {y}. You lost!</p>)
-            scoreState = scoreState + x;
           }
       this.setState({
         wins: winsState,
@@ -249,6 +249,15 @@ class App extends React.Component {
     })
   }
 
+    newTeam() {
+    this.setState({
+      myTeam:[],
+      wins: 0,
+      losses: 0,
+      score: 0
+    })
+  }
+
 
       componentDidMount() {
       const dbref= firebase.database().ref().orderByChild('score');
@@ -301,9 +310,15 @@ class App extends React.Component {
             Pics courtesy of Pam Lau. Visit her site
             <a href="https://pamlau.com/"> here</a>
           </p>
+
+          {this.state.myTeam.length < 2 ?
+            <div className="rosterctn">
           {this.state.players.map(player => {
             return <Roster data={player} key={player.name} addPlayer={this.addPlayer} />;
           })}
+          </div>
+: null}
+
         </main>
         <section className="versus">
           <h2>Today's Game:</h2>
@@ -327,6 +342,12 @@ class App extends React.Component {
           <div className="btnContainer">
             <button onClick={this.resetGame}>Next Match</button>
           </div>
+
+          <div className="btnContainer">
+            <button onClick={this.newTeam}>New Team</button>
+          </div>
+        
+        
         </section>
 
         {/* is user wins 5 games, they enter their leaderboard */}

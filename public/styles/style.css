@@ -95,6 +95,14 @@ main {
       color: #fff;
       border: 1px solid white; }
 
+.rosterctn {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  margin: 0 auto;
+  justify-content: space-between; }
+
 @media (max-width: 680px) {
   .playerCard {
     width: 47%; } }

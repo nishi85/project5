@@ -29,6 +29,7 @@ class App extends React.Component {
       wins: 0,
       losses: 0,
       message: '',
+      h3: '',
       calculatedSeasonRecord: false,
       myTeam: [],
       myTeamOffence: 0,
@@ -126,7 +127,7 @@ class App extends React.Component {
           img: "public/assets/nat.jpg"
         },
        {
-          name: "Natalie Van Dine",
+          name: "Natalie V D",
           offence: 99,
           defence: 80,
           id: 3,
@@ -201,6 +202,7 @@ class App extends React.Component {
   }
 
   generateOppTeam() {
+
     const oppTeamState = [];
     for (let i = 0; i < 2; i++) {
       console.log(i);
@@ -240,15 +242,6 @@ class App extends React.Component {
     })
   }
 
-  // componentDidMount() {
-  //  const dbrefPlayers = firebase.database().ref('/roster');
-  //  dbrefPlayers.on('value', (snapshot) => {
-  //    const rosterData = snapshotval();
-  //    this.setState({
-  //      players: rosterData
-  //    })
-  //  })
-  // }
 
       componentDidMount() {
       const dbref= firebase.database().ref().orderByChild('score');
@@ -296,22 +289,26 @@ class App extends React.Component {
         <Header />
         <main>
           <h2>Select your team. Choose 2 players.</h2>
-        
           {this.state.players.map(player => {
             return <Roster data={player} key={player.name} addPlayer={this.addPlayer} />;
           })}
-
          </main>
-        <button onClick={this.generateOppTeam}>Opposing Team</button>
+         <section className ="versus">
+         
+          
+          {this.state.myTeam.map(player => {
+            return <Myteam data={player} key={player.name} />;
+          })}
 
-        {this.state.myTeam.map(player => {
-          return <Myteam data={player} key={player.name} />;
-        })}
+           <div className="btnContainer">
+            <button onClick={this.generateOppTeam}>Face off!</button>
+         </div>
 
-        <h3>vs</h3>
-        {this.state.oppTeam.map(player => {
-          return <Myteam data={player} key={player.id} />;
-        })}
+          <h3>vs</h3>
+          {this.state.oppTeam.map(player => {
+            return <Myteam data={player} key={player.id} />;
+          })}
+        </section>
 
         <Match 
           myTeamOffence={this.state.myTeamOffence} 

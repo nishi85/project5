@@ -1,0 +1,37 @@
+.versus {
+
+    width: 1170px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 auto;
+    justify-content: center;
+
+   .versusPlayer {
+        width: 25%;
+        margin: 10px;
+    img {
+        width: 100%;
+    }
+    }
+
+    h3 {
+        width: 100%;
+    }
+
+    .btnContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        margin: 0 auto;
+        width: 150px;
+        height: 40px;
+        padding: 5px;
+        margin: 5px;
+    }
+
+
+}

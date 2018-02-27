@@ -42,26 +42,27 @@ class App extends React.Component {
       teamName: '',
       teamMemberA: '',
       teamMemberB:'',
+    // array of players
       players: [
         {
           name: "Nishi",
-          offence: 88,
-          defence: 98,
+          offence: 99,
+          defence: 99,
           id: 1,
           img: "./public/assets/nishi.jpg"
         },
 
         {
           name: "Ferd",
-          offence: 75,
-          defence: 95,
+          offence: 85,
+          defence: 90,
           id: 2,
           img: "./public/assets/ferd.jpg"
         },
 
         {
           name: "Aaron",
-          offence: 79,
+          offence: 84,
           defence: 90,
           id: 3,
           img: "./public/assets/aaron.jpg"
@@ -70,7 +71,7 @@ class App extends React.Component {
         {
           name: "Aathavan",
           offence: 80,
-          defence: 80,
+          defence: 95,
           id: 4,
           img: "./public/assets/aath.jpg"
         },
@@ -78,15 +79,15 @@ class App extends React.Component {
         {
           name: "Carolyn",
           offence: 94,
-          defence: 84,
+          defence: 90,
           id: 5,
           img: "./public/assets/carolyn.jpg"
         },
 
                 {
           name: "Cece",
-          offence: 85,
-          defence: 85,
+          offence: 94,
+          defence: 88,
           id: 6,
           img: "./public/assets/cece.jpg"
         },
@@ -99,15 +100,15 @@ class App extends React.Component {
         },
         {
           name: "Joey",
-          offence: 80,
-          defence: 80,
+          offence: 90,
+          defence: 90,
           id: 8,
           img: "./public/assets/Joey.jpg"
         },
         {
           name: "Linda",
           offence: 92,
-          defence: 88,
+          defence: 90,
           id: 9,
           img: "./public/assets/linda.jpg"
         },
@@ -121,14 +122,14 @@ class App extends React.Component {
        {
           name: "Natasha",
           offence: 92,
-          defence: 80,
+          defence: 90,
           id: 11,
           img: "./public/assets/nat.jpg"
         },
        {
           name: "Natalie V D",
           offence: 90,
-          defence: 80,
+          defence: 92,
           id: 12,
           img: "./public/assets/nvd.jpg"
         }
@@ -147,6 +148,8 @@ class App extends React.Component {
         [e.target.id]: e.target.value
       });
     }
+
+    //function to calculate winner of match
 
   seasonRecord(x, y, times) {
     if (this.state.calculatedSeasonRecord === false) {
@@ -174,6 +177,8 @@ class App extends React.Component {
     }
   }
 
+  //add player to team
+
   addPlayer(player) {
     if (this.state.myTeam.length < 2) {
       const myTeamState = Array.from(this.state.myTeam);
@@ -200,6 +205,7 @@ class App extends React.Component {
     }
   }
 
+  //generate opposing team
   generateOppTeam() {
 
     const oppTeamState = [];
@@ -232,6 +238,8 @@ class App extends React.Component {
     );
   }
 
+
+  //reset game
   resetGame() {
     this.setState({
       message: '',
@@ -261,6 +269,7 @@ class App extends React.Component {
       });
     }
 
+    //add to leaderboard
   addLeaderboard(e) {
   e.preventDefault();
   const leaderboard = {
@@ -320,10 +329,12 @@ class App extends React.Component {
           </div>
         </section>
 
-        {this.state.wins >= 1 ? <section className="highScore">
+        {/* is user wins 5 games, they enter their leaderboard */}
+
+        {this.state.wins >= 5 ? <section className="highScore">
             <form onSubmit={this.addLeaderboard}>
               <p>
-                Contratulations on winning 5 games! Your team is now
+                Congratulations on winning 5 games! Your team is now
                 eligible to be entered into the leaderboard!
               </p>
               <p>Total Score: {this.state.score}</p>

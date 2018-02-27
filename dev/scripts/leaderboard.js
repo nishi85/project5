@@ -5,10 +5,15 @@ const Leaderboard = props => {
   <div className = "lbcc">
     <p>Team Name: {props.data.teamName}</p>
     <p>Score: {props.data.score}</p>
-    <div>
-      <img src={props.data.teamMemberA} alt="" />
+    <div className = "imgcontainer">
       <img src={props.data.teamMemberB} alt="" />
     </div>
+
+      <div className ="imgcontainer">
+          <img src={props.data.teamMemberA} alt="" />
+      </div>
+  
+  
   </div>
   );
 };

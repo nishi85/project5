@@ -2,7 +2,7 @@ import React from "react";
 
 const Leaderboard = props => {
   return (
-  <div>
+  <div className = "lbcc">
     <p>Team Name: {props.data.teamName}</p>
     <p>Score: {props.data.score}</p>
     <div>

@@ -7,6 +7,10 @@
     margin: 0 auto;
     justify-content: center;
 
+    h2{
+        width: 100%;
+    }
+
    .versusPlayer {
         width: 25%;
         margin: 10px;
@@ -31,6 +35,8 @@
         height: 40px;
         padding: 5px;
         margin: 10px 5px 5px 5px;
+         border: 1px solid black;
+        background: white;
     }
 
 

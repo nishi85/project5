@@ -10,7 +10,7 @@ function finalDefence(x, y) {
 }
 
 function pointsFor(x) {
-   return Math.floor(Math.random() * (20 + x*1.5) + 100);
+   return Math.floor(Math.random() * (10 + x*1.5) + 100);
 }
 
 function pointsAgainst(x) {
@@ -78,9 +78,6 @@ class Match extends React.Component {
                         <p>My team defence: {myTeamDefence}</p>
                         <p>Opposing team offence: {oppTeamOffence}</p>
                         <p>Opposing team defence: {oppTeamOffence}</p>
-                        <p>Difference is {offenceDifference}</p>
-                        <p>Difference is {defenceDifference}</p>
-
                         <h3>{this.props.message}</h3>
                         <p>Wins: {this.props.wins}</p>
                         <p>Losses:{this.props.losses}</p>

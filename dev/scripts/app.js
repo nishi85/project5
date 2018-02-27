@@ -294,13 +294,13 @@ class App extends React.Component {
          </main>
          <section className ="versus">
          
-          
+          <h2>Today's Game:</h2>
           {this.state.myTeam.map(player => {
             return <Myteam data={player} key={player.name} />;
           })}
 
            <div className="btnContainer">
-            <button onClick={this.generateOppTeam}>Face off!</button>
+            <button onClick={this.generateOppTeam}>Face Off!</button>
          </div>
 
           <h3>vs</h3>
@@ -309,7 +309,7 @@ class App extends React.Component {
           })}
         </section>
           
-        <section>
+        <section className ="matchup">
 
         <Match 
           myTeamOffence={this.state.myTeamOffence} 
@@ -320,27 +320,36 @@ class App extends React.Component {
           seasonRecord={this.seasonRecord} 
           wins={this.state.wins} 
           losses={this.state.losses} 
-          message={this.state.message} />
+          mes classNamesage={this.state.message} />
+
+        <div className = "btnContainer">
+          <button onClick={this.resetGame}>Next Match</button>
+        </div>
+
 
           </section>
 
-        <button onClick={this.resetGame}>Next Match</button>
-
-
-        {this.state.wins >= 1 ? <form onSubmit ={this.addLeaderboard}>
+        
+        {this.state.wins >= 1 ? <section className="highScore">
+         <form onSubmit ={this.addLeaderboard}>   
             <p>Contratulations on winning 5 games! Your team is now eligible to be entered into the leaderboard!</p>
-            <label htmlFor="teamName">Team Name:</label>
+            <p>Total Score: {this.state.score}</p>
+            <label htmlFor="teamName">Team Name: </label>
             <input type="text" value ={this.state.teamName} onChange ={this.handleChange} id="teamName"/>
             <input type="submit" value="Add to Leaderboard" />
           </form> 
-          : null}
-       
 
+</section>
+          : null}
+      
+          <section className= "lbc">
+          <h2>Leaderboard</h2>
             {this.state.leaderboard.map((leader) =>{
               return (
                <Leaderboard data={leader} key={leader.key} />
               )
             })}
+           </section> 
 
       </div>
   }

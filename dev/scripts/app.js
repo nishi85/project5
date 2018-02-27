@@ -48,7 +48,7 @@ class App extends React.Component {
           offence: 88,
           defence: 98,
           id: 1,
-          img: "public/assets/nishi.jpg"
+          img: "./public/assets/nishi.jpg"
         },
 
         {
@@ -56,7 +56,7 @@ class App extends React.Component {
           offence: 75,
           defence: 95,
           id: 2,
-          img: "public/assets/ferd.jpg"
+          img: "./public/assets/ferd.jpg"
         },
 
         {
@@ -64,7 +64,7 @@ class App extends React.Component {
           offence: 79,
           defence: 90,
           id: 3,
-          img: "public/assets/aaron.jpg"
+          img: "./public/assets/aaron.jpg"
         },
 
         {
@@ -72,7 +72,7 @@ class App extends React.Component {
           offence: 80,
           defence: 80,
           id: 4,
-          img: "public/assets/aath.jpg"
+          img: "./public/assets/aath.jpg"
         },
 
         {
@@ -80,7 +80,7 @@ class App extends React.Component {
           offence: 94,
           defence: 84,
           id: 5,
-          img: "public/assets/carolyn.jpg"
+          img: "./public/assets/carolyn.jpg"
         },
 
                 {
@@ -88,49 +88,49 @@ class App extends React.Component {
           offence: 85,
           defence: 85,
           id: 6,
-          img: "public/assets/cece.jpg"
+          img: "./public/assets/cece.jpg"
         },
         {
           name: "Brent",
           offence: 90,
           defence: 90,
           id: 7,
-          img: "public/assets/brent.jpg"
+          img: "./public/assets/brent.jpg"
         },
         {
           name: "Joey",
           offence: 80,
           defence: 80,
           id: 8,
-          img: "public/assets/Joey.jpg"
+          img: "./public/assets/Joey.jpg"
         },
         {
           name: "Linda",
           offence: 92,
           defence: 88,
           id: 9,
-          img: "public/assets/linda.jpg"
+          img: "./public/assets/linda.jpg"
         },
         {
           name: "Natalie R",
           offence: 99,
           defence: 90,
           id: 10,
-          img: "public/assets/natalie.jpg"
+          img: "./public/assets/natalie.jpg"
         },
        {
           name: "Natasha",
           offence: 92,
           defence: 80,
           id: 11,
-          img: "public/assets/nat.jpg"
+          img: "./public/assets/nat.jpg"
         },
        {
           name: "Natalie V D",
           offence: 90,
           defence: 80,
           id: 12,
-          img: "public/assets/nvd.jpg"
+          img: "./public/assets/nvd.jpg"
         }
       ]
     };
